@@ -1,18 +1,16 @@
 'use strict';
 
 const table = document.querySelector('table');
+const rows = [...table.rows];
 
-for (let i = 0; i < table.rows.length; i++) {
-  const row = table.rows[i];
-  const cells = row.cells[1].innerHTML;
+for (let i = 0; i < rows.length; i++) {
+  const row = rows[i];
+  const cellContent = row.cells[1].innerHTML;
   const newCells = row.insertCell(row.cells.length - 1);
 
-  if (
-    row.parentNode.tagName === 'THEAD' ||
-    row.parentNode.tagName === 'TFOOT'
-  ) {
-    newCells.outerHTML = `<th>${cells}</th>`;
+  if (row.parentNode.tagName !== 'TBODY') {
+    newCells.outerHTML = `<th>${cellContent}</th>`;
   } else {
-    newCells.outerHTML = `<td>${cells}</td>`;
+    newCells.outerHTML = cellContent;
   }
 }
